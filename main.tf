@@ -38,15 +38,22 @@ resource "google_storage_transfer_job" "s3_to_gcs_job" {
   }
 
   schedule {
+    # 開始日と終了日を同じ日にすると、その日だけ実行されます
     schedule_start_date {
       year  = 2026
       month = 1
-      day   = 31
+      day   = 30
     }
-    # 即時実行の設定
+    schedule_end_date {
+      year  = 2026
+      month = 1
+      day   = 30
+    }
+
+    # 時間を指定（例: UTC 08:30 / 日本時間 17:00）
     start_time_of_day {
-      hours   = 0
-      minutes = 0
+      hours   = 8
+      minutes = 30
       seconds = 0
       nanos   = 0
     }
