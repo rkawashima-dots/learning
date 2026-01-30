@@ -7,6 +7,13 @@ resource "google_project_service" "storage_transfer_api" {
   disable_on_destroy = false
 }
 
+terraform {
+  backend "gcs" {
+    bucket = "dotsline-learning-tfstate"
+    prefix = "terraform/state"
+  }
+}
+
 # 1．プロバイダーの設定
 provider "google" {
   project = "dotsline-learning"  # あなたのプロジェクトIDに書き換え
