@@ -81,7 +81,7 @@ resource "google_bigquery_table" "external_json_table" {
   external_data_configuration {
     autodetect    = true      # スキーマ（列名と型）を自動判別
     source_format = "NEWLINE_DELIMITED_JSON" # 1行1JSONの形式
-    source_uris   = ["gs://your-gcs-bucket-name/*.json"] # 参照するGCSパス
+    source_uris   = ["gs://handson-gcs-transfer-20260130-kawashima/from-s3-tf/*.json"] # 参照するGCSパス
   }
 }
 
