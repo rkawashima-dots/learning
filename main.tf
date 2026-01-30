@@ -11,6 +11,7 @@ resource "google_project_service" "storage_transfer_api" {
 provider "google" {
   project = "dotsline-learning"  # あなたのプロジェクトIDに書き換え
   region  = "asia-northeast1"
+  user_project_override = true
 }
 
 # 2. 転送ジョブの定義
