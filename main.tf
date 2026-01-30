@@ -67,5 +67,23 @@ resource "google_storage_transfer_job" "s3_to_gcs_job" {
   }
 }
 
+# BigQuery データセットの作成（未作成の場合）
+resource "google_bigquery_dataset" "raw_data_dataset" {
+  dataset_id = "s3_import_data"
+  location   = "asia-northeast1"
+}
+
+# GCSのJSONを参照する外部テーブル
+resource "google_bigquery_table" "external_json_table" {
+  dataset_id = google_bigquery_dataset.raw_data_dataset.dataset_id
+  table_id   = "s3_json_logs"
+
+  external_data_configuration {
+    autodetect    = true      # スキーマ（列名と型）を自動判別
+    source_format = "NEWLINE_DELIMITED_JSON" # 1行1JSONの形式
+    source_uris   = ["gs://handson-gcs-transfer-20260130-kawashima/from-s3-tf/*.json"] # 参照するGCSパス
+  }
+}
+
 variable "aws_access_key_id" {}
 variable "aws_secret_access_key" {}
