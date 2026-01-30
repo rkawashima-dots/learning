@@ -60,7 +60,7 @@ resource "google_storage_transfer_job" "s3_to_gcs_job" {
     # 時間を指定（例: UTC 08:30 / 日本時間 17:00）
     start_time_of_day {
       hours   = 8
-      minutes = 30
+      minutes = 13
       seconds = 0
       nanos   = 0
     }
